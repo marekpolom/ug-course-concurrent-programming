@@ -10,8 +10,8 @@ class Button:
         self.width = size[0]
         self.height = size[1]
 
-        self.font = pygame.font.SysFont("Arial", math.floor(self.height * 0.6))
-        self.text = self.font.render(text, True, "black")
+        self.font = pygame.font.SysFont("Arial", math.floor(self.height * 0.5))
+        self.text = self.font.render(text, True, "white")
 
         self.color = color
         self.color_hovered = color if color_hovered is None else color_hovered

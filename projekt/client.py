@@ -59,8 +59,11 @@ class Client:
 
         self.board = None
 
+        self.is_def = False
+
     def set_board(self, board_data):
         self.board = np.array([Field(field["hit"], field["ship_id"]) for field in board_data]).reshape(10, 10)
+        self.is_def = False
 
     def clear_board(self):
         self.board = None
@@ -226,10 +229,12 @@ class Reply:
     @staticmethod
     def check_winner(game_data, client):
         if client.is_defeated():
+            client.clear_board()
             return Reply("end_game", {"msg": "You loose!", "winner": False})
 
         if game_data.get_enemy(client.address) is not None:
             if game_data.get_enemy(client.address).is_defeated():
+                client.clear_board()
                 return Reply("end_game", {"msg": "You win!", "winner": True})
 
         return Reply("continue", {"msg": "Continue game"})

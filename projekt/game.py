@@ -23,15 +23,16 @@ class Game:
             2,
             4,
             {
-                "color": "gray",
-                "field_color_default": "red",
-                "field_color_default_hover": "green",
-                "field_color_destroyed": "magenta",
-                "field_color_destroyed_hover": "cyan",
-                "field_color_hit": "black",
-                "field_color_hit_hover": "purple",
-                "field_color_missed": "yellow",
-                "field_color_missed_hover": "blue",
+                "color": (23, 23, 23),
+                "field_color_default": (255, 255, 255),
+                "field_color_default_hover": (255, 255, 255),
+                "field_color_selected": (92, 92, 92),
+                "field_color_destroyed": (148, 38, 24),
+                "field_color_destroyed_hover": (148, 38, 24),
+                "field_color_hit": (143, 93, 93),
+                "field_color_hit_hover": (143, 93, 93),
+                "field_color_missed": (181, 181, 181),
+                "field_color_missed_hover": (181, 181, 181),
             },
         )
         self.enemy_board = EnemyBoard(
@@ -41,24 +42,25 @@ class Game:
             2,
             4,
             {
-                "color": "gray",
+                "color": (23, 23, 23),
                 "color_clear": "gray",
-                "field_color_default": "red",
-                "field_color_default_hover": "green",
-                "field_color_destroyed": "magenta",
-                "field_color_destroyed_hover": "cyan",
-                "field_color_hit": "black",
-                "field_color_hit_hover": "purple",
-                "field_color_missed": "yellow",
-                "field_color_missed_hover": "blue",
+                "field_color_default": (255, 255, 255),
+                "field_color_default_hover": (156, 156, 156),
+                "field_color_selected": (92, 92, 92),
+                "field_color_destroyed": (63, 145, 52),
+                "field_color_destroyed_hover": (63, 145, 52),
+                "field_color_hit": (121, 156, 112),
+                "field_color_hit_hover": (121, 156, 112),
+                "field_color_missed": (181, 181, 181),
+                "field_color_missed_hover": (181, 181, 181),
             },
         )
         self.buttons = [
-            Button((62, 430), (100, 40), "Generuj", self.board.generate_ships_placement, "blue", "yellow"),
-            Button((175, 430), (100, 40), "Wyczyść", self.board.clear_board, "blue", "yellow"),
+            Button((62, 430), (100, 40), "Generuj", self.board.generate_ships_placement, (23, 23, 23), (51, 51, 51)),
+            Button((175, 430), (100, 40), "Wyczyść", self.board.clear_board, (23, 23, 23), (51, 51, 51)),
         ]
         self.threadable_buttons = [
-            Button((288, 430), (100, 40), "Start", self.start_game, "blue", "yellow"),
+            Button((288, 430), (100, 40), "Start", self.start_game, (23, 23, 23), (51, 51, 51)),
         ]
         self.canvas = Canvas(self.width, self.height, "Statki")
 
@@ -100,9 +102,6 @@ class Game:
 
                 if self.board.generated:
                     [button.draw(self.canvas.get_canvas()) for button in self.threadable_buttons]
-
-            if game_started:
-                pygame.draw.rect(self.canvas.get_canvas(), "green", (5, 5, 20, 20))
 
             if global_game_data is not None:
                 text = self.font.render(global_game_data["data"]["msg"], True, "black")

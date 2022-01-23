@@ -226,7 +226,10 @@ class Field:
 
             return self.colors["color_missed"]
 
-        if self.is_hovered() or self.selected:
+        if self.selected:
+            return self.colors["color_selected"]
+
+        if self.is_hovered():
             return self.colors["color_default_hover"]
 
         return self.colors["color_default"]
